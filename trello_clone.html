@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+  <head>
+    <title>Trello Clone</title>
+		<link rel="stylesheet" href="css/trello_clone.css">
+  </head>
+  
+  <body>
+
+		<!-- card container template -->
+		<template id="card-container-template">
+			<style>
+				.cardContainer {
+					position: 'relative';
+					width: 100%;
+					height: 600px;
+					background-color: #8c9eac;
+					border: 1px solid #6a6a70; 				
+					-webkit-border-radius: 10px;
+					-ms-border-radius: 10px;
+					-moz-border-radius: 10px;
+					border-radius: 10px;
+					z-index: 2;
+					opacity: 0.15;
+				}
+				.cardContainerTitle {
+					color: white;
+					font-size: 1.5vw;
+					margin: 0px 0 5px 0;
+					padding: 2px 6px 2px 6px;	
+				}
+				.addCardIcon {
+					float: right;
+					font-size: 1.2vw;
+					color: white;
+					text-shadow: #000 0 1px;
+					background-color: #363738;					
+					border: 0.2vw solid #6a6a70;
+					border-radius: 4px;
+					margin-top: 5px;
+					padding: 2px 6px 2px 6px;
+					cursor: pointer;
+					transition: 0.5s;
+				}
+				.addCardIcon:hover {
+					background-color: #c6c6ce;
+					color: black;
+				}
+			</style>
+			
+			<div class="cardContainerTitle" contenteditable="true">
+				<slot name="title">
+					Enter Title
+				</slot>
+			</div>		
+			<div class="cardContainer">			
+			</div>
+			<div class="addCardIcon">+ Add card</div>
+		</template>
+		
+		<!-- card template -->
+		<template id="card-template">
+			<style>		
+			.card {
+				position: 'absolute';
+				width: 100%;
+				height: 100%;
+				/*
+				background-color: rgb(149, 183, 223);
+				border: 1px solid #3c35a1;
+				*/  
+				background-color: #c6c6ce;
+				border: 1px solid #545357;  		
+				-webkit-border-radius: 10px;
+				-ms-border-radius: 10px;
+				-moz-border-radius: 10px;
+				border-radius: 10px;
+				-webkit-box-shadow: 0 4px 10px 0 #000;
+				-ms-box-shadow: 0 4px 10px 0 #000;
+				box-shadow: 0 4px 10px 0 #000;	
+				cursor: pointer;	
+				z-index: 4;	
+			}	
+			.card > .title {
+				margin: 0px 0 5px 0;
+				padding: 2px 6px 2px 6px;
+				/*
+				background-color: #217ac0;
+				*/ 
+				background-color: #363738; 
+				text-shadow: #000 0 1px;			
+				color: white;
+				font-size: 1.25vw;
+				-webkit-border-top-left-radius: 10px;
+				-moz-border-radius-topleft: 10px;
+				-ms-border-radius-topleft: 10px;
+				border-top-left-radius: 10px;
+				-webkit-border-top-right-radius: 10px;
+				-ms-border-top-right-radius: 10px;
+				-moz-border-radius-topright: 10px;
+				border-top-right-radius: 10px;
+				-webkit-box-shadow: inset 0 0 3px #000;
+				-ms-box-shadow: inset 0 0 3px #000;
+				box-shadow: inset 0 0 3px #000;
+			}
+			.card > .description {
+				margin: 5px 0 5px 0;
+				padding: 2px 6px 2px 6px;
+				font-size: 1vw;
+			}		
+			.card > .deleteIcon {
+				float: right;
+				font-size: 1.5vw;
+				color: white;
+				text-shadow: #000 0 1px;
+				font-weight: bold;
+				/*
+				background-image: url("");
+				background-repeat: no-repeat;
+				width: auto;
+				height: auto; 
+				margin: 0;
+				padding: 0;
+				*/
+			}
+			</style>
+				
+			<div class="card">
+				<div class="deleteIcon">x&nbsp;&nbsp;</div>
+				<div class="title" contenteditable="true">
+					<!--<slot name="title">-->
+						Enter Title
+					<!--</slot>-->				
+				</div>			
+				<div class="description" contenteditable="true">
+					<slot name="description">
+						Enter description
+					</slot>
+				</div>
+			</div>	
+		</template>
+
+		<script src="js/common_util.js"></script>
+		<script src="js/trello_clone_components.js"></script>
+		<script src="js/trello_clone_manager.js"></script>
+
+		<script>
+		(function() {
+			// initialize and render the board
+			const trelloCloneMgr = new TrelloCloneMgr();
+			trelloCloneMgr.generateBoard();
+			//trelloCloneMgr.testBoard();
+		})();
+		</script>  
+    
+  </body>  
+</html>
